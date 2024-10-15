@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+    :root {
+        --primary-color: #f1faff;
+        --text-dark: #030712;
+        --text-light: #6b7280;
+        --extra-light: #fbfbfb;
+        --white: #ffffff;
+        --max-width: 1200px;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .table-full-width {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-full-width th, .table-full-width td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table-full-width th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    .table-full-width tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-full-width tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    #content {
+        margin-left: 250px;
+        padding: 20px;
+    }
+
+    .btn-add, .btn-edit, .btn-delete {
+        text-decoration: none;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 5px;
+    }
+
+    .btn-add {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-edit {
+        background-color: #FFC107;
+        color: white;
+    }
+
+    .btn-delete {
+        background-color: #F44336;
+        color: white;
+    }
+
+    .form-delete {
+        display: inline;
+    }
+</style>
+
+<h1>Manage Products</h1>
+<a href="{{ url_for('add_product') }}" class="btn-add">Create New Product</a>
+
+<table class="table-full-width">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product['productID'] }}</td>
+                <td>{{ product['productName'] }}</td>
+                <td>{{ product['productCategory'] }}</td>
+                <td>{{ product['productUnitPrice'] }}</td>
+                <td>{{ product['productStock'] }}</td>
+                <td><img src="{{ product['imageURL'] }}" alt="{{ product['productName'] }}" height="50"></td>
+                <td>
+                    <a href="{{ url_for('update_product', product_id=product['productID']) }}" class="btn-edit">Edit</a>
+                    <form action="{{ url_for('delete_product', product_id=product['productID']) }}" method="post" class="form-delete">
+                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this product?');" class="btn-delete">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

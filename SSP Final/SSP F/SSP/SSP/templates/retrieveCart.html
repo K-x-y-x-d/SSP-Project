@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Library Loan System -View Shopping{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Shopping</h1>
+<div>
+    {% if count == 0 %}
+    <p>There are no products.</p>
+    {% elif count == 1 %}
+    <p>There is 1 product.</p>
+    {% else %}
+    <p>There are {{ count }} products.</p>
+    {% endif %}
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product</th>
+            <th>Price ($)</th>
+            <th>Quantity</th>
+            <th>Remarks</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in carts_list %}
+        <tr>
+            <td>{{ product.get_user_id() }}</td>
+            <td>{{ product.get_product() }}</td>
+            <td>{{ product.get_price() }}</td>
+            <td>{{ product.get_quantity() }}</td>
+            <td>{{ product.get_remarks() }}</td>
+            <td><a href="/add_cart/{{product.get_product()}}/{{product.get_price()}}" class="btn btn-primary">Add to cart</a> </td>
+            <td><a href="/updateCart/{{product.get_user_id()}}" class="btn btn-warning">Update</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

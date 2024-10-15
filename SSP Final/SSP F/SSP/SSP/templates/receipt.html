@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Biro - receipt{% endblock %}
+
+{% block content %}
+<body>
+    <div class="hi">
+        <h2>Your Order has been placed! <br> Thank you for shopping with us!</h2>
+        <a href="/">Return Home</a>
+    </div>
+</body>
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hi {
+font-size: 1rem;
+font-weight: 50;
+margin-bottom: 2rem;
+color: var(--text-dark);
+text-align: center;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Biro - Update Cart{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<h1 class="display-4">Update Cart</h1>
+
+<form method="POST" action="">
+  <div class="form-group">
+    {{ render_field(form.product, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.price, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.quantity, class="form-control") }}
+  </div>
+  <div id="prof">
+    <div class="form-group">
+      {{ render_field(form.remarks, class="form-control") }}
+    </div>
+  </div>
+  <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+</style>
+{% endblock %}

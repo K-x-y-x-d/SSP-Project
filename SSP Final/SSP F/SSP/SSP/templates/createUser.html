@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}Biro - Create Staff{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<form class="container" method="POST" action="">
+  {{ form.csrf_token }}
+  <h1 class="display-4">Create Staff Account</h1>
+  <div class="form-group">
+    {{ render_field(form.username, class="form-control") }}
+  </div>
+  <div class="form-group">
+    <div class="password-container">
+      {{ render_field(form.password, class="form-control", id="password") }}
+      <span class="password-toggle" onclick="togglePasswordVisibility('password')">👁️</span>
+    </div>
+    <div id="password-strength" class="mt-2"></div>
+    <div id="password-requirements" class="mt-2">
+      <p id="length-req">Must be 8 characters at minimum</p>
+      <p id="uppercase-req">Must contain at least 1 alpha (A-Z) character(s)</p>
+      <p id="number-req">Must contain at least 1 numeric (0-9) character(s)</p>
+      <p id="special-req">Must contain at least 1 special character(s) (~!@#$%^&*()_+)</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="password-container">
+      {{ render_field(form.confirm_password, class="form-control", id="confirm-password") }}
+      <span class="password-toggle" onclick="togglePasswordVisibility('confirm-password')">👁️</span>
+    </div>
+    <p id="confirm-req">Confirmation OK</p>
+  </div>
+  <div class="form-group">
+    {{ render_field(form.role, class="form-check", style="list-style-type:none") }}
+  </div>
+  {{ form.recaptcha }}
+  {% for error in form.recaptcha.errors %}
+  <ul>
+      <li style="color:red;">{{ error }}</li>
+  {% endfor %}
+  </ul>
+  <input type="submit" value="Create" class="btn btn-primary"/>
+</form>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.display-4 {
+  font-size: 30px;
+}
+
+.form-group {
+  width: 500px;
+  height: auto;
+  padding: 5px;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  background: #f5f5f5;
+  padding: 25px 30px;
+  border-radius: 5px;
+  margin-top: 5%;
+  height: auto;
+}
+
+#password-strength {
+  font-size: 14px;
+  height: 20px;
+}
+
+.password-strength-bar {
+  height: 5px;
+  width: 100%;
+  background-color: #e0e0e0;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.password-strength-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+}
+
+#password-requirements p, #confirm-req {
+    margin-bottom: 5px;
+    color: #6b7280;
+}
+#password-requirements p.met, #confirm-req.met {
+    color: green;
+}
+#password-requirements p::before, #confirm-req::before {
+    content: '❌ ';
+}
+#password-requirements p.met::before, #confirm-req.met::before {
+    content: '✅ ';
+}
+
+.password-container {
+    position: relative;
+}
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+.password-toggle:hover {
+    opacity: 0.7;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const passwordInput = document.getElementById('password');
+  const confirmInput = document.getElementById('confirm-password');
+  const strengthDisplay = document.getElementById('password-strength');
+  const lengthReq = document.getElementById('length-req');
+  const uppercaseReq = document.getElementById('uppercase-req');
+  const numberReq = document.getElementById('number-req');
+  const specialReq = document.getElementById('special-req');
+  const confirmReq = document.getElementById('confirm-req');
+  const passwordPolicy = {
+    minLength: 8,
+    minUppercase: 1,
+    minNumbers: 1,
+    minSpecial: 1,
+  };
+
+  function updateRequirements(password) {
+    lengthReq.classList.toggle('met', password.length >= passwordPolicy.minLength);
+    uppercaseReq.classList.toggle('met', (password.match(/[A-Z]/g) || []).length >= passwordPolicy.minUppercase);
+    numberReq.classList.toggle('met', (password.match(/[0-9]/g) || []).length >= passwordPolicy.minNumbers);
+    specialReq.classList.toggle('met', (password.match(/[~!@#$%^&*()_+]/g) || []).length >= passwordPolicy.minSpecial);
+  }
+
+  function updateConfirmation() {
+    confirmReq.classList.toggle('met', passwordInput.value === confirmInput.value);
+  }
+
+  function updateStrengthDisplay(strength) {
+    const strengthBar = document.createElement('div');
+    strengthBar.classList.add('password-strength-bar');
+
+    const strengthSpan = document.createElement('span');
+    strengthSpan.style.width = strength + '%';
+
+    if (strength < 30) {
+      strengthSpan.style.backgroundColor = 'red';
+    } else if (strength < 60) {
+      strengthSpan.style.backgroundColor = 'orange';
+    } else {
+      strengthSpan.style.backgroundColor = 'green';
+    }
+
+    strengthBar.appendChild(strengthSpan);
+    strengthDisplay.innerHTML = '';
+    strengthDisplay.appendChild(strengthBar);
+  }
+
+  function evaluatePassword(password) {
+    let strength = 0;
+
+    if (password.length >= passwordPolicy.minLength) {
+      strength += 25;
+    }
+
+    if ((password.match(/[A-Z]/g) || []).length >= passwordPolicy.minUppercase) {
+      strength += 25;
+    }
+
+    if ((password.match(/[0-9]/g) || []).length >= passwordPolicy.minNumbers) {
+      strength += 25;
+    }
+
+    if ((password.match(/[~!@#$%^&*()_+]/g) || []).length >= passwordPolicy.minSpecial) {
+      strength += 25;
+    }
+
+    return strength;
+  }
+
+  passwordInput.addEventListener('input', function() {
+    const password = passwordInput.value;
+    updateRequirements(password);
+    updateConfirmation();
+    const strength = evaluatePassword(password);
+    updateStrengthDisplay(strength);
+  });
+
+  confirmInput.addEventListener('input', updateConfirmation);
+});
+
+function togglePasswordVisibility(fieldId) {
+  const field = document.getElementById(fieldId);
+  if (field.type === "password") {
+    field.type = "text";
+  } else {
+    field.type = "password";
+  }
+}
+</script>
+{% endblock %}

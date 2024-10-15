@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Update Product: {{ product_id }}</h1>
+    <form method="POST" action="{{ url_for('update_product', product_id=product_id) }}">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.product_id.label }}<br>
+            <input type="text" name="product_id" value="{{ product_id }}" readonly>
+        </p>
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}
+        </p>
+        <p>
+            {{ form.category.label }}<br>
+            {{ form.category() }}
+        </p>
+        <p>
+            {{ form.price.label }}<br>
+            {{ form.price(size=20) }}
+        </p>
+        <p>
+            {{ form.stock.label }}<br>
+            {{ form.stock(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+        <p>
+           {{ form.image_url.label }}<br>
+           {{ form.image_url(size=32) }}
+        </p>
+    </form>
+{% endblock %}

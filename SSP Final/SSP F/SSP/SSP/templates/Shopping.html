@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Biro -View Shopping{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mt-3">
+             <div style="card text-center">
+                 <div class="card">
+                     <img src="{{ product.get_image_url() }}" alt="{{ product.get_name() }}" height="200">
+                     <div class="card-body">
+                         <h5 class="card-text">{{ product.get_name() }}</h5>
+                         <p class="card-text">Price ${{ product.get_price() }}</p>
+                     </div>
+                     <a href="/add_cart/{{product.get_name()}}/{{product.get_price()}}" class="btn btn-primary">Add to cart</a>
+                 </div>
+             </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.card{
+width: 200px;
+height: 400px;
+}
+
+</style>
+{% endblock %}

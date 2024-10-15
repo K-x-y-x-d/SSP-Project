@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Biro - checkout{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Checkout</h1>
+<br>
+<h3 style="margin-left:100px;">Billing Details</h3>
+
+<style>
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  style="padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;"
+}
+
+th {
+  height: auto;
+}
+
+input {
+  margin: 10px;
+}
+</style>
+
+<div>
+<table style="margin-left:100px; background-color:white;">
+      {% for customer in customers_list %}
+      <tr>
+        <th>Username:</th>
+        <td>{{ customer.get_username() }}</td>
+      </tr>
+      <tr>
+        <th>Email:</th>
+        <td>{{ customer.get_email() }}</td>
+      </tr>
+      <tr>
+        <th>Address:</th>
+        <td>{{ customer.get_address() }}</td>
+      </tr>
+      <tr>
+        <th>Payment:</th>
+          {% if customer.get_payment() == "A" %}
+            <td>American Express</td>
+          {% elif customer.get_payment() == "M" %}
+            <td>MasterCard</td>
+          {% elif customer.get_payment() == "V" %}
+            <td>Visa</td>
+          {% endif %}
+      </tr>
+      {% endfor %}
+</table>
+<br>
+<form method="post" action="#" style="margin-left:100px;">
+    <fieldset>
+    <legend>Payment Details</legend>
+    <label for="card-name">Name on Card:</label>
+    <input type="text" id="card-name" name="cardname" required><br>
+
+    <label for="card-number">Card Number:</label>
+    <input type="text" id="card-number" name="cardnumber" inputmode="numeric" pattern="[0-9]*" required><br>
+
+    <label for="expiration-date">Expiration Date:</label>
+    <input type="month" id="expiration-date" name="expiration" required><br>
+
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" inputmode="numeric" pattern="[0-9]*" required>
+  </fieldset>
+<a class="btn btn-primary" href="/receipt">Place Order</a>
+</form>
+</div>
+
+<div style="position:absolute; right:25%; top:150px;">
+    <h3>Order Details</h3>
+     <table style="background-color: white;">
+        <thead>
+        <tr>
+            <th>Product </th>
+            <th>Price ($)</th>
+            <th>Quantity</th>
+        </thead>
+        <tbody>
+        {% for item in number_item %}
+        <tr>
+            <td>{{ cart_list[item]["product"] }}</td>
+            <td>{{  cart_list[item]["price"] }}</td>
+            <td>{{ cart_list[item]["quantity"] }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3">Total: ${{ Grandtotal }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+</style>
+
+{% endblock %}

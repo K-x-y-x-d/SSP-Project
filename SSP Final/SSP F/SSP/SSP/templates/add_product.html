@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  .display-4{
+    font-size:30px;
+    color: black;
+  }
+
+  .form-group{
+    width: 500px;
+    height: 100px;
+    padding: 5px;
+  }
+
+  .container{
+    max-width: 700px;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 25px 30px;
+    border-radius: 5px;
+    margin-top: 5%;
+    height: 70%;
+
+</style>
+
+    <a href="{{ url_for('manage_products') }}" class="display-4">Manage Products</a>
+
+    <form class="container" method="POST" action="{{ url_for('add_product') }}">
+            <h1 class="display-4">Add New Product</h1>
+        {{ form.hidden_tag() }}
+        <p class="form-group">
+            {{ form.product_id.label }}<br>
+            {{ form.product_id(size=32) }}
+        </p>
+        <p class="form-group">
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}
+        </p>
+        <p class="form-group">
+            {{ form.category.label }}<br>
+            {{ form.category() }}
+        </p>
+        <p class="form-group">
+            {{ form.price.label }}<br>
+            {{ form.price(size=32) }}
+        </p>
+        <p class="form-group">
+            {{ form.stock.label }}<br>
+            {{ form.stock(size=32) }}
+        </p>
+        <p class="form-group">
+           {{ form.image_url.label }}<br>
+           {{ form.image_url(size=32) }}
+        </p>
+        <p class="form-group">{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Biro - Update Feedback{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+
+<form class="container" method="POST" action="">
+  <h1 class="display-4"><b>Update Feedback</b></h1>
+  <div class="form-group">
+    {{ render_field(form.first_name, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.last_name, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.email, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.topic, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.date_joined, class="form-control datepicker") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.rating, class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ render_field(form.message, class="form-control") }}
+  </div>
+  <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+  .display-4{
+    font-size: 30px;
+  }
+
+  .form-group{
+    width: 500px;
+    height: 100px;
+    padding: 5px;
+  }
+
+  .container{
+    max-width: 700px;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 25px 30px;
+    border-radius: 5px;
+    margin-top: 5%;
+    height: 90%;
+  }
+</style>
+{% endblock %}

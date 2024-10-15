@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer Security Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('{{ url_for('static', filename='pexels-pixabay-33545.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .security-questions-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            text-align: center;
+        }
+        .security-questions-container h1 {
+            margin-bottom: 20px;
+        }
+        .security-questions-container input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .security-questions-container button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .security-questions-container button:hover {
+            background-color: #0056b3;
+        }
+        .question { display: none; }
+        .question.active { display: block; }
+    </style>
+</head>
+<body>
+<div class="security-questions-container">
+    <h1>Answer Security Questions</h1>
+    <form id="security-questions-form" action="{{ url_for('reset_password') }}" method="post">
+        {% for question in questions %}
+            <div class="question" id="question{{ loop.index }}">
+                <label for="answer{{ loop.index }}">{{ question }}</label>
+                <input type="text" name="answer{{ loop.index }}" placeholder="Answer" id="answer{{ loop.index }}" required autocomplete="off">
+            </div>
+        {% endfor %}
+        <div class="navigation-buttons">
+            <button type="button" id="prev-button" onclick="navigate(-1)">Previous</button>
+            <button type="button" id="next-button" onclick="navigate(1)">Next</button>
+            <button type="submit" id="submit-button" style="display:none;">Submit Answers</button>
+        </div>
+    </form>
+</div>
+<script>
+    var currentQuestion = 0;
+    var totalQuestions = {{ questions|length }};
+    var questions = document.querySelectorAll('.question');
+
+    function showQuestion(index) {
+        questions.forEach((question, i) => {
+            question.classList.remove('active');
+            if (i === index) {
+                question.classList.add('active');
+            }
+        });
+        document.getElementById('prev-button').style.display = index === 0 ? 'none' : 'inline';
+        document.getElementById('next-button').style.display = index === totalQuestions - 1 ? 'none' : 'inline';
+        document.getElementById('submit-button').style.display = index === totalQuestions - 1 ? 'inline' : 'none';
+    }
+
+    function navigate(direction) {
+        currentQuestion += direction;
+        if (currentQuestion >= 0 && currentQuestion < totalQuestions) {
+            showQuestion(currentQuestion);
+        }
+    }
+
+    // Initialize
+    showQuestion(currentQuestion);
+</script>
+</body>
+</html>

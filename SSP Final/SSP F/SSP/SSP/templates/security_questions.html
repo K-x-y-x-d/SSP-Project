@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Security Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='pexels-kellie-churchman-371878-1001682.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .security-questions {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .question { display: none; }
+        .question.active { display: block; }
+        .navigation-buttons { margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="security-questions">
+    <h1>Set Security Questions</h1>
+    <form id="security-questions-form" action="{{ url_for('save_security_questions') }}" method="post">
+        {% for question in questions %}
+            <div class="question" id="question{{ loop.index }}">
+                <label for="answer{{ loop.index }}">{{ question }}</label>
+                <input type="text" name="answer{{ loop.index }}" placeholder="Answer" id="answer{{ loop.index }}" required autocomplete="off">
+                <input type="hidden" name="question{{ loop.index }}" value="{{ question }}">
+            </div>
+        {% endfor %}
+        <div class="navigation-buttons">
+            <button type="button" id="prev-button" onclick="navigate(-1)">Previous</button>
+            <button type="button" id="next-button" onclick="navigate(1)">Next</button>
+            <button type="submit" id="submit-button" style="display:none;">Save Answers</button>
+        </div>
+    </form>
+</div>
+<script>
+    var currentQuestion = 0;
+    var totalQuestions = {{ questions|length }};
+    var questions = document.querySelectorAll('.question');
+
+    function showQuestion(index) {
+        questions.forEach((question, i) => {
+            question.classList.remove('active');
+            if (i === index) {
+                question.classList.add('active');
+            }
+        });
+        document.getElementById('prev-button').style.display = index === 0 ? 'none' : 'inline';
+        document.getElementById('next-button').style.display = index === totalQuestions - 1 ? 'none' : 'inline';
+        document.getElementById('submit-button').style.display = index === totalQuestions - 1 ? 'inline' : 'none';
+    }
+
+    function navigate(direction) {
+        currentQuestion += direction;
+        if (currentQuestion >= 0 && currentQuestion < totalQuestions) {
+            showQuestion(currentQuestion);
+        }
+    }
+
+    // Initialize
+    showQuestion(currentQuestion);
+</script>
+</body>
+</html>
+

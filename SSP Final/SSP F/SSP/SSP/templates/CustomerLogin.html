@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Biro - Log In{% endblock %}
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<form class="container" method="POST" action="{{ url_for('customer_login') }}">
+    <h1 class="display-4">Login</h1>
+
+    <!-- Display the error message if login fails -->
+    {% if msg %}
+        <p style="color:red; text-align:center;">{{ msg }}</p>
+    {% endif %}
+
+    <div class="mb-3 mt-3">
+      <label for="username" class="form-label">Username:</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="myCheck"  name="remember" required>
+      <label class="form-check-label" for="myCheck">I agree with the terms and conditions</label>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Check this checkbox to continue.</div>
+    </div>
+    <div>
+        <a>New to Biro?</a><a href="/createCustomer">Sign Up</a>
+        <p><a href="/forgot_password">Forgot Password?</a></p>
+    </div>
+  <button type="submit" class="btn btn-primary">Log In</button>
+</form>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+    .display-4{
+    font-size:30px;
+  }
+
+  .form-group{
+    width: 500px;
+    height: 100px;
+    padding: 5px;
+  }
+
+  .container{
+    max-width: 700px;
+    width: 100%;
+    background: #f5f5f5;
+    padding: 25px 30px;
+    border-radius: 5px;
+    margin-top: 5%;
+    height: 90%;
+}
+</style>
+{% endblock %}

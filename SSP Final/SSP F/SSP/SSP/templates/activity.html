@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Activity Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        .settings {
+            display: flex;
+            min-height: 100vh;
+        }
+        .settings-sidebar {
+            width: 250px;
+            background-color: #2f4f4f;
+            padding: 20px;
+            color: #fff;
+        }
+        .settings-sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .settings-sidebar ul li {
+            margin: 15px 0;
+        }
+        .settings-sidebar ul li a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .settings-sidebar ul li a:hover {
+            background-color: #1e90ff;
+        }
+        .settings-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .settings-content h2 {
+            margin-top: 0;
+            color: #2f4f4f;
+            font-size: 24px;
+            border-bottom: 2px solid #1e90ff;
+            padding-bottom: 10px;
+        }
+        .settings-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .settings-content table, .settings-content th, .settings-content td {
+            border: 1px solid #ddd;
+        }
+        .settings-content th, .settings-content td {
+            padding: 12px;
+            text-align: left;
+        }
+        .settings-content th {
+            background-color: #1e90ff;
+            color: #fff;
+        }
+        .settings-content td {
+            background-color: #f9f9f9;
+        }
+        .settings-content td:first-child {
+            font-weight: bold;
+        }
+        .settings-content p {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="settings">
+    <div class="settings-sidebar">
+        <ul>
+            <li><a href="{{ url_for('settings', option='account_activity') }}">Account Activity Logging</a></li>
+            <li><a href="{{ url_for('home') }}">Back to Home</a></li>
+        </ul>
+    </div>
+    <div class="settings-content">
+        <h2>Account Activity Logging</h2>
+        {% if logs %}
+            <table>
+                <tr>
+                    <th>Activity</th>
+                    <th>Timestamp</th>
+                </tr>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log['activity'] }}</td>
+                    <td>{{ log['timestamp'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No activity recorded.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

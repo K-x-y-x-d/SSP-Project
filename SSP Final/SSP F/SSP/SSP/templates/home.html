@@ -1,0 +1,686 @@
+{% extends "base.html" %}
+{% block title %}Biro - Home{% endblock %}
+
+{% block content %}
+<body>
+    {% if 'username' in session %}
+        <p style="text-align: center">You are logged in as {{ session['username'] }}</p>
+    {% else %}
+        <p style="text-align: center">You are not logged in</p>
+    {% endif %}
+
+    <!-- Display the error message if login fails -->
+    {% if msg %}
+        <p style="color: red; text-align: center">{{ msg }}</p>
+    {% endif %}
+
+	<header>
+      <div class="section__container header__container">
+        <div class="header__content">
+          <p>EXTRA 55% OFF IN SPRING SALE</p>
+          <h1>Discover & Shop<br />The Trend Ss19</h1>
+          <a href="/Shopping">
+          <button class="btn">SHOP NOW</button>
+          </a>
+        </div>
+        <div class="header__image">
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/header.png?raw=true" alt="header">
+        </div>
+      </div>
+    </header>
+	<section class="section__container collection__container">
+      <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/collection.jpg?raw=true" alt="collection" />
+      <div class="collection__content">
+        <h2 class="section__title">New Collection</h2>
+        <p>#35 ITEMS</p>
+        <h4>Available on Store</h4>
+        <a href="/Shopping">
+        <button class="btn">>>SHOP NOW</button>
+        </a>
+      </div>
+    </section>
+
+    <section class="section__container sale__container">
+      <h2 class="section__title">On Sale</h2>
+      <div class="sale__grid">
+        <div class="sale__card">
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/sale-1.jpg?raw=true" alt="sale" />
+          <div class="sale__content">
+            <p class="sale__subtitle">MAN OUTERWEAR</p>
+            <h4 class="sale__title">sale <span>40%</span> off</h4>
+            <p class="sale__subtitle">- DON'T MISS -</p>
+            <a href="/Shopping">
+            <button class="btn sale__btn">SHOP NOW</button>
+            </a>
+          </div>
+        </div>
+        <div class="sale__card">
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/sale-2.jpg?raw=true" alt="sale" />
+          <div class="sale__content">
+            <p class="sale__subtitle">WOMAN T-SHIRT</p>
+            <h4 class="sale__title">sale <span>25%</span> off</h4>
+            <p class="sale__subtitle">- DON'T MISS -</p>
+            <a href="/Shopping">
+            <button class="btn sale__btn">SHOP NOW</button>
+            </a>
+          </div>
+        </div>
+        <div class="sale__card">
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/sale-3.jpg?raw=true" alt="sale" />
+          <div class="sale__content">
+            <p class="sale__subtitle">JACKETS</p>
+            <h4 class="sale__title">sale <span>20%</span> off</h4>
+            <p class="sale__subtitle">- DON'T MISS -</p>
+            <a href="/Shopping">
+            <button class="btn sale__btn">SHOP NOW</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container musthave__container">
+      <h2 class="section__title">Must Have</h2>
+      <div class="musthave__nav">
+        <a href="#">ALL</a>
+        <a href="#">MAN</a>
+        <a href="#">WOMEN</a>
+        <a href="#">BAG</a>
+        <a href="#">SHOES</a>
+      </div>
+      <div class="musthave__grid">
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/products/artisant0_540x.jpg?v=1674648926" alt="must have" style="align:left;"/>
+          <h4>F. CLASSIC ARTISAN T</h4>
+          <p><del>$179.00</del> $140.00</p>
+        </div>
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/products/navylinenshirt6_540x.jpg?v=1674650672" alt="must have"/>
+          <h4>Linen SS Shirt</h4>
+          <p><del>$309.00</del> $280.00</p>
+        </div>
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/products/samsuishirt0_540x.jpg?v=1674651701" alt="must have"/>
+          <h4>Samsui Women Shirt</h4>
+          <p><del>$320.00</del> $280.00</p>
+        </div>
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/files/samsuiLS4-1_540x.jpg?v=1701244961" alt="must have" style="height:720px; width:540px;"/>
+          <h4>Samsui Women Shirt LS</h4>
+          <p><del>$359.00</del> $330.00</p>
+        </div>
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/products/fcsimpletblackfront_540x.jpg?v=1610343859" alt="must have"/>
+          <h4>F. CLASSIC SIMPLE POCKET T BLACK</h4>
+          <p><del>$183.00</del> $140.00</p>
+        </div>
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/products/denimshortfront_540x.jpg?v=1610355239" alt="must have"/>
+          <h4>Saint Day Denim Shorts</h4>
+          <p><del>$285.00</del> $250.00</p>
+        </div>
+        <div class="musthave__card">
+          <img src="https://www.birocompany.com/cdn/shop/products/linen-shorts-PS1_540x.jpg?v=1674647600" alt="must have"/>
+          <h4>Linen Shorts</h4>
+          <p><del>$279.00</del> $250.00</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="news">
+      <div class="section__container news__container">
+        <h2 class="section__title">Latest News</h2>
+        <div class="news__grid">
+          <div class="news__card">
+            <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/news-1.jpg?raw=true" alt="news" />
+            <div class="news__details">
+              <p>
+                FASHION <i class="ri-checkbox-blank-circle-fill"></i>
+                <span>GIGI HADID</span>
+                <i class="ri-checkbox-blank-circle-fill"></i> FEB 2, 2023
+              </p>
+              <h4>Seasonal Trends</h4>
+              <hr />
+              <p>
+                The latest fashion trends for the current season include oversized silhouettes, vibrant monochromatic looks, and futuristic metallic accents, so consider incorporating statement pieces like an oversized blazer or a metallic accessory to effortlessly elevate your wardrobe and stay on-trend.
+              </p>
+              <a href="#"><i class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+          <div class="news__card">
+            <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/news-2.jpg?raw=true" alt="news" />
+            <div class="news__details">
+              <p>
+                TRENDS <i class="ri-checkbox-blank-circle-fill"></i>
+                <span>DENZEL WILLIAMS</span>
+                <i class="ri-checkbox-blank-circle-fill"></i> APR 15, 2021
+              </p>
+              <h4>Fashion Tips and Advice</h4>
+              <hr />
+              <p>
+                Tailor your outfit to the occasion by combining comfort with style, considering your body type, and embracing your personal preferences, ensuring a confident and fashionable appearance.
+              </p>
+              <a href="#"><i class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+          <div class="news__card">
+            <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/news-3.jpg?raw=true" alt="news" />
+            <div class="news__details">
+              <p>
+                STYLE <i class="ri-checkbox-blank-circle-fill"></i>
+                <span>JAMES SIMSON</span>
+                <i class="ri-checkbox-blank-circle-fill"></i> JUL 22, 2022
+              </p>
+              <h4>Sustainable Fashion</h4>
+              <hr />
+              <p>
+                The escalating trend of eco-conscious fashion emphasizes the imperative need for sustainability in wardrobe choices, urging individuals to explore eco-friendly materials, embrace second-hand and vintage clothing, and support brands committed to ethical and environmentally responsible practices.
+              </p>
+              <a href="#"><i class="ri-arrow-right-line"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <footer class="section__container footer__container">
+      <div class="footer__col">
+        <h4 class="footer__heading">CONTACT INFO</h4>
+        <p>
+          <i class="ri-map-pin-2-fill"></i> 896131, Orchard Boulevard, Singapore
+        </p>
+        <p><i class="ri-mail-fill"></i> support@biro.com</p>
+        <p><i class="ri-phone-fill"></i> (+65)  6123 9097</p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">COMPANY</h4>
+        <p>Home</p>
+        <p>About Us</p>
+        <p>Work With Us</p>
+        <p>Our Blog</p>
+        <p>Terms & Conditions</p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">USEFUL LINKS</h4>
+        <p>Help</p>
+        <p>Track My Order</p>
+        <p>Men</p>
+        <p>Women</p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">INSTAGRAM</h4>
+        <div class="instagram__grid">
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/instagram-1.jpg?raw=true" alt="instagram" />
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/instagram-2.jpg?raw=true" alt="instagram" />
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/instagram-3.jpg?raw=true" alt="instagram" />
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/instagram-4.jpg?raw=true" alt="instagram" />
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/instagram-5.jpg?raw=true" alt="instagram" />
+          <img src="https://github.com/WebDesignMastery/Monsa_12-05-23/blob/main/assets/instagram-6.jpg?raw=true" alt="instagram" />
+        </div>
+      </div>
+    </footer>
+
+    <hr />
+
+    <div class="section__container footer__bar">
+      <div class="copyright">
+        Copyright © Biro Company. All rights reserved.
+      </div>
+      <div class="footer__form">
+        <form>
+          <input type="number" placeholder="ENTER YOUR PHONE" />
+        </form>
+      </div>
+    </div>
+</body>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  margin-top: 10rem;
+  background-color: var(--primary-color);
+}
+
+.header__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.header__content p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.header__content h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+}
+
+.header__content .btn {
+  background-color: var(--text-dark);
+  color: var(--white);
+}
+
+.header__image {
+  position: relative;
+}
+
+.header__image img {
+  max-width: 400px;
+  position: absolute;
+  bottom: -5rem;
+}
+
+.collection__container {
+  position: relative;
+}
+
+.collection__container img {
+  max-width: 400px;
+  margin: auto;
+}
+
+.collection__content {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+}
+
+.collection__content .section__title {
+  margin-bottom: 2rem;
+}
+
+.collection__content p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.collection__content h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.collection__content .btn {
+  border: 1px solid var(--text-dark);
+  color: var(--text-dark);
+  background-color: var(--white);
+}
+
+.collection__content .btn:hover {
+  background-color: var(--text-dark);
+  color: var(--white);
+}
+
+.sale__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.sale__card {
+  position: relative;
+  overflow: hidden;
+}
+
+.sale__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  color: var(--white);
+  text-align: center;
+}
+
+.sale__title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.sale__title span {
+  font-size: 2.5rem;
+}
+
+.sale__subtitle {
+  font-size: 1rem;
+}
+
+.sale__btn {
+  margin-top: 2rem;
+  color: var(--white);
+  background-color: var(--text-dark);
+}
+
+.sale__card::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: -100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+.sale__card:hover::before {
+  top: 0;
+}
+
+.sale__card:hover .sale__btn {
+  color: var(--text-dark);
+  background-color: var(--white);
+}
+
+.musthave__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.musthave__nav a {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  transition: 0.3s;
+}
+
+.musthave__nav a:hover {
+  color: var(--text-dark);
+}
+
+.musthave__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.musthave__card {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--text-dark);
+}
+
+.musthave__card h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.musthave__card p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.musthave__card p del {
+  font-weight: 400;
+  color: var(--text-light);
+}
+
+.news {
+  background-color: var(--extra-light);
+}
+
+.news__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.news__details {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+  text-align: center;
+}
+
+.news__details p {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.news__details p i {
+  font-size: 0.5rem;
+  color: var(--text-light);
+  padding: 0.5rem;
+}
+
+.news__details p span {
+  font-weight: 600;
+}
+
+.news__details h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.news__details a i {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  transition: 0.3s;
+}
+
+.news__details a:hover i {
+  color: var(--text-dark);
+}
+
+.brands__container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+}
+
+.brand__image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.brand__image img {
+  max-width: 120px;
+}
+
+.brand__image:hover {
+  opacity: 1;
+}
+
+.footer__container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer__heading {
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.footer__heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 50px;
+  background-color: var(--text-light);
+}
+
+.footer__col p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer__col p:hover {
+  color: var(--text-dark);
+}
+
+.footer__col p i {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.instagram__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.footer__bar {
+  padding: 2rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.footer__form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer__form form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.footer__form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--text-dark);
+  font-size: 0.8rem;
+}
+
+.footer__form .btn {
+  background-color: var(--text-dark);
+  color: var(--white);
+}
+
+@media (width < 900px) {
+  header {
+    margin-top: 5rem;
+  }
+
+  .sale__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .musthave__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .news__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brands__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .instagram__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__bar {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .copyright {
+    text-align: center;
+  }
+
+  .footer__form {
+    justify-content: center;
+  }
+}
+
+@media (width < 600px) {
+  .nav__links {
+    display: none;
+  }
+
+  header {
+    margin-top: 0;
+  }
+
+  .header__container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .header__image {
+    display: none;
+  }
+
+  .sale__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .musthave__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .news__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .brands__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+{% endblock %}
+

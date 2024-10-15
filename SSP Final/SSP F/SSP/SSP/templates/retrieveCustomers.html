@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Biro - Retrieve Customers{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Retrieve Customers</h1>
+
+<div>
+  {% if count == 0 %}
+    <p>There are no customers.</p>
+  {% elif count == 1 %}
+    <p>There is 1 customer.</p>
+  {% else %}
+    <p>There are {{ count }} customers.</p>
+  {% endif %}
+</div>
+
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer ID</th>
+        <th>Username</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Payment</th>
+        <th>Last Failed Attempt</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customers_list %}
+        <tr>
+          <td>{{ customer['customerID'] }}</td>
+          <td>{{ customer['username'] }}</td>
+          <td>{{ customer['gender'] }}</td>
+          <td>{{ customer['mailingAddress'] }}</td>
+          <td>{{ customer['creditcardType'] }}</td>
+          <td>{{ customer['lastFailedAttempts'] }}</td>
+          <td><a href="{{ url_for('update_customer', username=customer['username']) }}" class="btn btn-warning">Update</a></td>
+          <td>
+            <form action="{{ url_for('delete_customer', username=customer['username']) }}" method="POST">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{ customer['customerID'] }}">
+                Delete
+              </button>
+
+              <!-- The Modal -->
+              <div class="modal" id="myModal_{{ customer['customerID'] }}">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Are you sure?</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      Are you sure you want to delete {{ customer['username'] }}?
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <input type="submit" value="Delete" class="btn btn-danger">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+  .display-4{
+    font-size: 30px;
+  }
+</style>
+{% endblock %}
+

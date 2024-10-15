@@ -1,0 +1,66 @@
+<!-- templates/product_information.html -->
+{% extends 'base.html' %}
+
+{% block title %}Product Information{% endblock %}
+
+{% block content %}
+  <h1>Product Information</h1>
+
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% endif %}
+
+  <!-- Form for creating a new product -->
+  <form method="post" action="{{ url_for('product_information') }}">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Unit Price</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Form fields for creating a new product -->
+        <tr>
+          <td><input type="text" name="product_id" required></td>
+          <td><input type="text" name="unit_price" required></td>
+          <td><input type="text" name="name" required></td>
+          <td><input type="text" name="description" required></td>
+          <td>
+            <select name="category" required>
+              <option value="SHIRTS">Shirts</option>
+              <option value="T-SHIRTS">T-Shirts</option>
+              <option value="BOTTOMS">Bottoms</option>
+            </select>
+          </td>
+          <td><input type="text" name="image_url" required></td>
+          <td><button type="submit">Create</button></td>
+        </tr>
+
+<!-- Existing products in table rows -->
+{% for product_id, product in products.items() %}
+  <tr>
+    <td>{{ product['product_id'] }}</td>
+    <td>${{ product['unit_price'] }}</td>
+    <td>{{ product['name'] }}</td>
+    <td>{{ product['description'] }}</td>
+    <td>{{ product['category'] }}</td>
+    <td><img src="{{ product['image_url'] }}" alt="Product Image" style="max-width: 100px; max-height: 100px;"></td>
+    <td>
+<!-- Modify the form action for the delete button -->
+<form method="post" action="{{ url_for('remove_product', product_id=product['product_id']) }}" style="display: inline;">
+    <button type="submit" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+</form>
+
+    </td>
+  </tr>
+{% endfor %}
+      </tbody>
+    </table>
+  </form>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Biro - View Cart{% endblock %}
+
+{% block content %}
+<h1 class="display-4">Cart</h1>
+<div>
+    {% if counts == 0 %}
+    <p>There are no products.</p>
+    {% elif counts == 1 %}
+    <p>There is 1 product.</p>
+    {% else %}
+    <p>There are {{ counts }} products.</p>
+    {% endif %}
+</div>
+<div>
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Product </th>
+            <th>Price ($)</th>
+            <th>Quantity</th>
+            <th></th>
+            <th></th>
+
+        </thead>
+        <tbody>
+        {% for item in number_item %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{ cart_list[item]["product"] }}</td>
+            <td>${{cart_list[item]["price"]}}</td>
+            <td><form method="post" action="/update_item/{{ cart_list[item]['id'] }}">
+                <input type="number" name="quantity" min="1" max="10" value="{{ cart_list[item]['quantity'] }}">
+                <td><button type="submit" class="btn btn-sm btn-info">Update</button></td>
+            </form></td>
+            <td><a href="/delete_item/{{cart_list[item]['id']}}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p>Grandtotal: ${{Grandtotal}}</p>
+    <a href="/Shopping" class="btn btn-link">Continue Shopping</a>
+    <a href="/checkout">Checkout</a>
+</div>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #f1faff;
+  --text-dark: #030712;
+  --text-light: #6b7280;
+  --extra-light: #fbfbfb;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+</style>
+{% endblock %}
